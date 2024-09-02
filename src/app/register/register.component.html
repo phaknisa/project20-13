@@ -16,6 +16,16 @@
                     class="form-control"
                     id="floatingInput">
                 <label for="floatingInput">Fullname</label>
+
+                @if(submitted && registerFrom.controls['fullname'].errors){
+                    @if(registerFrom.controls['fullname'].errors['required']){
+
+                        <div class="text-danger mt-2">
+                            กรุณาป้อน Fullname
+                        </div>
+
+                }
+            }
    
             </div>
 
@@ -27,6 +37,21 @@
                     class="form-control"
                     id="floatingInput">
                 <label for="floatingInput">Email</label>
+
+                @if(submitted && registerFrom.controls['email'].errors){
+                    @if(registerFrom.controls['email'].errors['required']){
+
+                        <div class="text-danger mt-2">
+                            กรุณาป้อน Email
+                        </div>
+                    @if(registerFrom.controls['email'].errors['email']){
+
+                        <div class="text-danger mt-2">
+                            กรุณาป้อนรูปแบบ Email ให้ถูกต้อง
+                        </div>
+                    }
+                    }
+                }
    
             </div>
    
@@ -38,6 +63,16 @@
                     class="form-control"
                     id="floatingInput">
                 <label for="floatingInput">Mobile</label>
+
+                @if(submitted && registerFrom.controls['mobile'].errors){
+                    @if(registerFrom.controls['mobile'].errors['required']){
+
+                        <div class="text-danger mt-2">
+                            กรุณาป้อน Moblie
+                        </div>
+                    
+                    }
+                }
    
             </div>
 
@@ -49,6 +84,16 @@
                     class="form-control"
                     id="floatingPassword">
                 <label for="floatingPassword">Password</label>
+
+                @if(submitted && registerFrom.controls['mobile'].errors){
+                    @if(registerFrom.controls['mobile'].errors['required']){
+
+                        <div class="text-danger mt-2">
+                            กรุณาป้อน Password
+                        </div>
+
+                    }
+                }
    
             </div>
 
@@ -59,17 +104,19 @@
             <button
                 class="btn btn-primary w-100 py-2"
                 type="submit"
+                (click)="submitLogin()"
                 >Sign in
             </button>
    
             <button
                 class="btn btn-warning w-100 py-2 mt-2"
                 type="submit"
+                (click)="resetForm()"
                 >Reset
             </button>
    
-            <!-- {{ userLogin.email }}
-            {{ userLogin.password }} -->
+            <!-- {{ registerLogin.email }}
+            {{ userRegister.password }} -->
    
         </form>
     </main>
