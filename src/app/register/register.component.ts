@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { 
+import {
   ReactiveFormsModule,
   FormsModule,
   FormGroup,
@@ -10,64 +10,61 @@ import {
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule,FormsModule],
+  imports: [ReactiveFormsModule, FormsModule],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.scss'
+  styleUrls: ['./register.component.scss'] 
 })
 export class RegisterComponent {
-   //FormsGroup
-   registerFrom!: FormGroup;
-   //สร้างตัวแปรไว้เช็คว่า Submit form หรือยัง
-   submitted = false;
-   //ตัวแปรสำหรับผูกกับฟอร์ม
-   userRegister = {
-     "fullname":"",
-     "email":"",
-     "mobile":"",
-     "password":"",
+  RegisterFrom!: FormGroup; 
+  submitted = false; 
 
-}
-constructor(private formBuilder: FormBuilder) {
+  userRegister = {
+    "Fullname": "",
+    "email": "",
+    "Mobile": "",
+    "password": "" 
+  };
 
-}
+  constructor(private formBuilder: FormBuilder) { }
 
-ngOnInit(){
-  this.registerFrom = this.formBuilder.group({
-    fullname:['',[Validators.required, Validators.minLength(30)]],
-    email:['',[Validators.required, Validators.email]],
-    mobile:['',[Validators.required, Validators.minLength(10)]],
-    password:['',[Validators.required, Validators.minLength(6)]],
+  ngOnInit() {
+    this.RegisterFrom = this.formBuilder.group({
+      Fullname: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      Mobile: ['', [Validators.required, Validators.minLength(10)]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
+    });
+  }
 
-  })
-}
-//ปุ่ม Login
-submitLogin(){
-  this.submitted = true;
-  //ถ้าฟอร์มไม่ถูกต้อง (Invalid)
-  if(this.registerFrom.invalid){
-    return
-  }else{
-    this.userRegister.fullname = this.registerFrom.value.fullname
-    this.userRegister.email = this.registerFrom.value.email
-    this.userRegister.mobile = this.registerFrom.value.mobile
-    this.userRegister.password = this.registerFrom.value.password
-    if(this.userRegister.email == "pppp@gmail.com" 
-      && this.userRegister.password == "12345678910"){
-        alert("สมัครสมาชิกสำเร็จ")
-    }else{
-      alert("ไม่สามารถสมัครสมาชิกได้")
+  
+  submitRegister() {
+    this.submitted = true;
+
+    if (this.RegisterFrom.invalid) {
+      return;
+    } else {
+      this.userRegister.Fullname = this.RegisterFrom.value.Fullname;
+      this.userRegister.email = this.RegisterFrom.value.email;
+      this.userRegister.Mobile = this.RegisterFrom.value.Mobile;
+      this.userRegister.password = this.RegisterFrom.value.password;
+
+      if (this.userRegister.email == "admin@gmail.com" 
+        && this.userRegister.password == "123456789") {
+        alert("Registration Successful");
+      } else {
+        alert("Registration Failed");
+      }
     }
   }
-}
 
-//ปุ่ม reset Form
-resetForm(){
-  this.submitted = false;
-  this.registerFrom.reset();
-}
-}
+  
+  resetForm() {
+    this.submitted = false;
+    this.RegisterFrom.reset();
 
-
+    
+  }
+}
 
 
 
